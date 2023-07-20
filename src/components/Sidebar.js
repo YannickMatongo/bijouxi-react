@@ -8,9 +8,12 @@ import { FiTrash2 } from "react-icons/fi";
 import CartItem from "../components/CartItem";
 //import sidebar context
 import { SidebarContext } from "../contexts/SidebarContext";
+// import Cart Context
+import { CartContext } from "../contexts/CartContext";
 
 const Sidebar = () => {
   const { isOpen, handleClose } = useContext(SidebarContext);
+  const { cart, clearCart } = useContext(CartContext);
   return (
     <div
       className={` ${
@@ -19,8 +22,32 @@ const Sidebar = () => {
     >
       <div className="flex items-center justify-between py-6 border-b">
         <div className="uppercase text-sm font-semibold">Shopping Bag (0)</div>
-        <div className="cursor-pointer w-8 h-8 flex justify-center items-center">
+        {/* icon */}
+        <div
+          onClick={handleClose}
+          className="cursor-pointer w-8 h-8 flex justify-center items-center"
+        >
           <IoMdArrowForward className="text-2xl" />
+        </div>
+      </div>
+      <div>
+        {cart.map((item) => {
+          return <CartItem item={item} key={item.id} />;
+        })}
+      </div>
+      <div className=" flex flex-col gap-y-3 py-4 mt-4">
+        <div className="flex w-full justify-between items-center">
+          {/* total */}
+          <div className='uppercase font-semibold'>
+            <span className='mr-2'>Total :</span> 1000 €
+          </div>
+          {/* clear cart icon */}
+          <div
+            onClick={clearCart}
+            className="cursor-pointer py-4 bg-red-500 text-white w-12 h-12 flex justify-center items-center text-xl"
+          >
+            <FiTrash2 />
+          </div>
         </div>
       </div>
     </div>
