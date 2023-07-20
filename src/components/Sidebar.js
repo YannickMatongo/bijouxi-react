@@ -39,7 +39,7 @@ const Sidebar = () => {
         <div className="flex w-full justify-between items-center">
           {/* total */}
           <div className="uppercase font-semibold">
-            <span className="mr-2">Total :</span>{total} €</div>
+            <span className="mr-2">Total :</span>{parseFloat(total).toFixed(2)} €</div>
           {/* clear cart icon */}
           <div
             onClick={clearCart}
